@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <exception>
 
 class	Poly {
 
@@ -13,12 +14,19 @@ class	Poly {
 		~Poly();
 
 		void	parseEquation();
+		void	displayReducedForm();
+		void	displayPolynomialDegree();
+		void	displaySolution();
 
 	private:
 
 		void	calculateDiscriminant();
 		void	checkBetweenOperator();
 		void	fillValues();
+		void	oneSolution();
+		void	twoRealSolution();
+		void	twoNotRealSolution();
+		void	firstDegreeSolution();
 
 		std::string	_equation;
 		float		_ax2;
@@ -28,3 +36,18 @@ class	Poly {
 		int			_degree;
 		float		_discriminant;
 }
+
+class	ErrSyntax {
+	virtual const char* what const throw(){
+		return "Wrong Syntax"
+	}
+}
+
+class	ErrDegree {
+	virtual const char* what const throw(){
+		return "Wrong Degree"
+	}
+}
+
+
+#endif
