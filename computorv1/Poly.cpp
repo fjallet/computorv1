@@ -41,21 +41,24 @@ void    Poly::parseEquation(){
 }
 
 void	Poly::checkBetweenOperator(std::string str, int minus){
-	float					value;
-	std::string::iterator	it;
-	value = strtof(str, NULL) * minus;
-	for (it = str.begin(); it != str.end() && *it != ',' && (*it > 57 || *it < 48); it++){}
+	float	value;
+	size_t	it;
+	value = strtof(str.c_str(), NULL) * minus;
+	for (it = 0; it < str.size() && str[it] != ',' && (str[it] > 57 || str[it] < 48); it++){}
+	if (it + 5 < str.size()){
+		throw SyntaxException();
+	}
 	std::string temp = str.substr(it, 5);
-	if (temp != " * X^")
-		throw ErrSyntax;
+	if (temp != " * X^"){
+		throw SyntaxException();
+	}
 	it += 5;
-	if (it >= str.end())
-		throw ErrSyntax;
-	printf("%f * X^%c", value, it*);
+	if (it > str.size()){
+		throw SyntaxException();
+	}
+	printf("%f * X^%c", value, str[it]);
 	//fillValues(*it, value)
 	it++;
-	if (it >= str.end())
-		throw ErrSyntax;
 }
 /*
 void	Poly::fillValues(char degree, float value){

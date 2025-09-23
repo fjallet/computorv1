@@ -41,13 +41,13 @@ class	Poly {
 		float		_discriminant;
 };
 
-class	ErrSyntax {
+class	SyntaxException: public std::exception{
 	virtual const char* what() const throw(){
 		return "Wrong Syntax";
 	}
 };
 
-class	ErrDegree {
+class	DegreeException: public std::exception{
 	virtual const char* what() const throw(){
 		return "Wrong Degree";
 	}
