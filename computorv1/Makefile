@@ -1,6 +1,6 @@
 NAME= computorv1
-SRCS = main.cpp poly.cpp
-INCLUDE = poly.hpp
+SRCS = main.cpp Poly.cpp
+INCLUDE = Poly.hpp
 
 OBJS		=		$(SRCS:.cpp=.o)
 DEPS		=		$(SRCS:.cpp=.d)

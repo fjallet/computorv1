@@ -1,6 +1,6 @@
 #include "Poly.hpp"
 
-Poly::Poly(std::string _equation) : _equation(equation){
+Poly::Poly(std::string equation) : _strequation(equation){
 	_ax2 = 0;
 	_bx1 = 0;
 	_cx0 = 0;
@@ -12,24 +12,28 @@ Poly::~Poly(){
 }
 
 void    Poly::parseEquation(){
-	size_t	countlen = -1;
-	float	minus = 0;
+	size_t	countlen = 0;
+	float	minus = 1;
 	size_t	it;
-	for (it = 0; it != NULL; it++){
-		if (_equation[it] == '+'){
-			checkBetweenOperator(_equation.substr(it - countlen, countlen), minus);
+	for (it = 0; it <= _strequation.size() ; it++){
+		if (_strequation[it] == '+'){
+			//printf("%f / %s\n", minus, _strequation.substr(it - countlen, countlen).c_str());
+			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 			countlen = -1;
-			minus = 0;
+			minus = 1;
 		}
-		if (_equation[it] == '-'){
-			checkBetweenOperator(_equation.substr(it - countlen, countlen), minus);
+		if (_strequation[it] == '-'){
+			//printf("%f / %s\n", minus, _strequation.substr(it - countlen, countlen).c_str());
+			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 			countlen = -1;
-			minus = -1
+			minus = -1;
 		}
-		if (_equation[it] == '='){
-			checkBetweenOperator(_equation.substr(it - countlen, countlen), minus);
-			checkBetweenOperator(_equation.substr(it));
-			minus = 0;
+		if (_strequation[it] == '='){
+			//printf("%f / %s\n", minus, _strequation.substr(it - countlen, countlen).c_str());
+			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
+			minus = -1;
+			//printf("%f / %s\n", minus, _strequation.substr(it + 1).c_str());
+			checkBetweenOperator(_strequation.substr(it), minus);
 			break;
 		}
 		countlen++;
@@ -38,22 +42,27 @@ void    Poly::parseEquation(){
 
 void	Poly::checkBetweenOperator(std::string str, int minus){
 	float					value;
-	std::string::iterartor	it;
-	value = strtof() * minus;
+	std::string::iterator	it;
+	value = strtof(str, NULL) * minus;
 	for (it = str.begin(); it != str.end() && *it != ',' && (*it > 57 || *it < 48); it++){}
-	std::string temp = str.substr(it, 5)
+	std::string temp = str.substr(it, 5);
 	if (temp != " * X^")
 		throw ErrSyntax;
 	it += 5;
 	if (it >= str.end())
 		throw ErrSyntax;
-	fillValues(*it, value)
+	printf("%f * X^%c", value, it*);
+	//fillValues(*it, value)
 	it++;
 	if (it >= str.end())
 		throw ErrSyntax;
 }
-
+/*
 void	Poly::fillValues(char degree, float value){
+	//if (this->_floatequation.find(degree) == this->_floatequation.end())
+	//	this->_floatequation.insert (std::pair<int,float>(degree,value));
+	//else
+	//	this->_floatequation[degree] += value;
 	switch (degree){
 		case '0':
 			this._cx0 += value
@@ -118,3 +127,4 @@ void	Poly::oneSolution(){
 void	Poly::twoRealSolution(){
 	std::cout << 
 }
+	*/

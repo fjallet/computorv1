@@ -10,7 +10,7 @@ int main(int argc, char** argv){
         equation.parseEquation();
     }
     catch (std::exception& e){
-        cout << "Error: " << e.what() << std::endl;
+        std::cout << "Error: " << e.what() << std::endl;
         return (1);
     }
     return (0);
