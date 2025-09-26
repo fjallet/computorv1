@@ -8,6 +8,9 @@ int main(int argc, char** argv){
     try{
         Poly    equation(argv[1]);
         equation.parseEquation();
+        equation.displayReducedForm();
+        equation.displayPolynomialDegree();
+        equation.displaySolution();
     }
     catch (std::exception& e){
         std::cout << "Error: " << e.what() << std::endl;

@@ -7,6 +7,7 @@
 #include <exception>
 #include <map>
 #include <stdlib.h>
+#include <tgmath.h>
 #include <cstdio>
 
 class	Poly {
@@ -25,20 +26,19 @@ class	Poly {
 
 		void	calculateDiscriminant();
 		void	checkBetweenOperator(std::string str, int minus);
-		void	fillValues();
+		void	fillValues(int degree, float value);
 		void	oneSolution();
 		void	twoRealSolution();
 		void	twoNotRealSolution();
 		void	firstDegreeSolution();
 
 		std::string	_strequation;
-		std::map<int, float> _floatequation;
+		std::map<int, float> _degreemap;
+		int			_degree;
+		float		_discriminant;
 		float		_ax2;
 		float		_bx1;
 		float		_cx0;
-		float		_d;
-		int			_degree;
-		float		_discriminant;
 };
 
 class	SyntaxException: public std::exception{
