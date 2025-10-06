@@ -8,7 +8,6 @@
 #include <map>
 #include <stdlib.h>
 #include <tgmath.h>
-#include <cstdio>
 
 class	Poly {
 
@@ -42,15 +41,7 @@ class	Poly {
 };
 
 class	SyntaxException: public std::exception{
-	virtual const char* what() const throw(){
-		return "Wrong Syntax";
-	}
-};
-
-class	DegreeException: public std::exception{
-	virtual const char* what() const throw(){
-		return "Wrong Degree";
-	}
+	virtual const char* what() const throw();
 };
 
 

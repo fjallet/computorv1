@@ -15,29 +15,28 @@ void    Poly::parseEquation(){
 	size_t	countlen = 0;
 	float	minus = 1;
 	size_t	it;
+	if (_strequation.size() < 5)
+		throw SyntaxException();
 	for (it = 0; it <= _strequation.size() ; it++){
 		if (_strequation[it] == '+'){
-			//printf("%f / %s\n", minus, _strequation.substr(it - countlen, countlen).c_str());
 			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 			countlen = -1;
 			minus = 1;
 		}
 		if (_strequation[it] == '-'){
-			//printf("%f / %s\n", minus, _strequation.substr(it - countlen, countlen).c_str());
 			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 			countlen = -1;
 			minus = -1;
 		}
 		if (_strequation[it] == '='){
-			//printf("%f / %s\n", minus, _strequation.substr(it - countlen, countlen).c_str());
 			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
+			countlen = -1;
 			minus = -1;
-			//printf("%f / %s\n", minus, _strequation.substr(it + 1).c_str());
-			checkBetweenOperator(_strequation.substr(it + 1), minus);
 			break;
 		}
 		countlen++;
 	}
+	checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 }
 
 void	Poly::checkBetweenOperator(std::string str, int minus){
@@ -46,7 +45,6 @@ void	Poly::checkBetweenOperator(std::string str, int minus){
 	value = strtof(str.c_str(), NULL) * minus;
 	if (str == " 0")
 		return;
-	//printf("&%s&\n", str.c_str());
 	if (str[it] == ' ')
 		it++;
 	while (it < str.size() && (str[it] == '.' || (str[it] <= 57 && str[it] >= 48)))
@@ -62,7 +60,6 @@ void	Poly::checkBetweenOperator(std::string str, int minus){
 	if (it > str.size()){
 		throw SyntaxException();
 	}
-	//printf("%f * X^%c\n", value, str[it]);
 	fillValues(str[it] - 48, value);
 	it++;
 }
@@ -154,4 +151,9 @@ void	Poly::twoNotRealSolution(){
 	std::cout << "Discriminant is strictly negative, the two complex solutions are:" << std::endl;
 	std::cout << _bx1 * - 1 << "/" << 2 * _ax2 << " + " << sqrt(abs(_discriminant)) << "i/" << 2 * _ax2 << std::endl;
 	std::cout << _bx1 * - 1 << "/" << 2 * _ax2 << " - " << sqrt(abs(_discriminant)) << "i/" << 2 * _ax2 << std::endl;
+}
+
+
+const char*	SyntaxException::what() const throw(){
+		return "Wrong Syntax";
 }
