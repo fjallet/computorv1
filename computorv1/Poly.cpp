@@ -15,24 +15,21 @@ void    Poly::parseEquation(){
 	size_t	countlen = 0;
 	float	minus = 1;
 	size_t	it;
-	if (_strequation.size() < 5)
-		throw SyntaxException();
 	for (it = 0; it <= _strequation.size() ; it++){
-		if (_strequation[it] == '+'){
+		if (_strequation[it] == '+' && countlen > 2){
 			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 			countlen = -1;
 			minus = 1;
 		}
-		if (_strequation[it] == '-'){
+		if (_strequation[it] == '-' && countlen > 2){
 			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 			countlen = -1;
 			minus = -1;
 		}
-		if (_strequation[it] == '='){
+		if (_strequation[it] == '=' && countlen > 2){
 			checkBetweenOperator(_strequation.substr(it - countlen, countlen), minus);
 			countlen = -1;
 			minus = -1;
-			break;
 		}
 		countlen++;
 	}
@@ -47,7 +44,7 @@ void	Poly::checkBetweenOperator(std::string str, int minus){
 		return;
 	if (str[it] == ' ')
 		it++;
-	while (it < str.size() && (str[it] == '.' || (str[it] <= 57 && str[it] >= 48)))
+	while (it < str.size() && (str[it] == '.' || str[it] == '-' || (str[it] <= 57 && str[it] >= 48)))
 		it++;
 	if (it + 5 > str.size()){
 		throw SyntaxException();
