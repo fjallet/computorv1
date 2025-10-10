@@ -16,5 +16,6 @@ int main(int argc, char** argv){
         std::cout << "Error: " << e.what() << std::endl;
         return (1);
     }
+    std::cout << sqrt(2) << std::endl;
     return (0);
 }

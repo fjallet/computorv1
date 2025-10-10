@@ -144,10 +144,53 @@ void	Poly::twoRealSolution(){
 	std::cout << (-1 * _bx1 - sqrt(_discriminant)) / (2 * _ax2) << std::endl;
 }
 
+int		Poly::getPGCD(int a, int b){
+	int	pgcd = 0;
+	a = abs(a);
+	b = abs(b);
+	while (b != 0){
+		pgcd = a % b;
+        a = b;
+        b = pgcd;
+	}
+	return (a);
+}
+
+float	Poly::mySQRT(float a){
+	return (a);
+}
+
+float	Poly::myABS(float a){
+	if (a > 0)
+		return (a);
+	else
+		return (a * -1);
+}
+
+bool	Poly::isInteger(float x){
+	return (x == static_cast<int>(x));
+}
+
+void	Poly::printIrreductibleFraction(float a, std::string link, float b){
+	int pgcd;
+	if (!isInteger(a) || !isInteger(b))
+		std::cout << a << link << b;
+	else {
+		pgcd = getPGCD(static_cast<int>(a), static_cast<int>(b));
+		std::cout << a / static_cast<float>(pgcd) << link << b / static_cast<float>(pgcd);
+	}
+}
+
 void	Poly::twoNotRealSolution(){
 	std::cout << "Discriminant is strictly negative, the two complex solutions are:" << std::endl;
-	std::cout << _bx1 * - 1 << "/" << 2 * _ax2 << " + " << sqrt(abs(_discriminant)) << "i/" << 2 * _ax2 << std::endl;
-	std::cout << _bx1 * - 1 << "/" << 2 * _ax2 << " - " << sqrt(abs(_discriminant)) << "i/" << 2 * _ax2 << std::endl;
+	printIrreductibleFraction(_bx1 * - 1, "/", 2 * _ax2);
+	std::cout << " + "; 
+	printIrreductibleFraction(sqrt(abs(_discriminant)), "i/", 2 * _ax2);
+	std::cout << std::endl;
+	printIrreductibleFraction(_bx1 * - 1, "/", 2 * _ax2);
+	std::cout << " - "; 
+	printIrreductibleFraction(sqrt(abs(_discriminant)), "i/", 2 * _ax2);
+	std::cout << std::endl;
 }
 
 

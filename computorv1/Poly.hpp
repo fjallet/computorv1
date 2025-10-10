@@ -31,6 +31,11 @@ class	Poly {
 		void	twoRealSolution();
 		void	twoNotRealSolution();
 		void	firstDegreeSolution();
+		int		getPGCD(int a, int b);
+		bool	isInteger(float x);
+		void	printIrreductibleFraction(float a, std::string link, float b);
+		float	myABS(float a);
+		float	mySQRT(float a);
 
 		std::string	_strequation;
 		std::map<int, float> _degreemap;
