@@ -7,7 +7,7 @@
 #include <exception>
 #include <map>
 #include <stdlib.h>
-#include <tgmath.h>
+//#include <tgmath.h>
 //#include <cstdio>
 
 class	Poly {
@@ -47,6 +47,10 @@ class	Poly {
 };
 
 class	SyntaxException: public std::exception{
+	virtual const char* what() const throw();
+};
+
+class	SQRTException: public std::exception{
 	virtual const char* what() const throw();
 };
 

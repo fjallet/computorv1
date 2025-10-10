@@ -140,14 +140,14 @@ void	Poly::oneSolution(){
 
 void	Poly::twoRealSolution(){
 	std::cout << "Discriminant is strictly positive, the two solutions are:" << std::endl;
-	std::cout << (-1 * _bx1 + sqrt(_discriminant)) / (2 * _ax2) << std::endl;
-	std::cout << (-1 * _bx1 - sqrt(_discriminant)) / (2 * _ax2) << std::endl;
+	std::cout << (-1 * _bx1 + mySQRT(_discriminant)) / (2 * _ax2) << std::endl;
+	std::cout << (-1 * _bx1 - mySQRT(_discriminant)) / (2 * _ax2) << std::endl;
 }
 
 int		Poly::getPGCD(int a, int b){
 	int	pgcd = 0;
-	a = abs(a);
-	b = abs(b);
+	a = myABS(a);
+	b = myABS(b);
 	while (b != 0){
 		pgcd = a % b;
         a = b;
@@ -157,7 +157,21 @@ int		Poly::getPGCD(int a, int b){
 }
 
 float	Poly::mySQRT(float a){
-	return (a);
+	float	x;
+	if (a < 0)
+		throw SQRTException();
+	if (a == 0)
+		return (0);
+	if (a > 0 && a < 1)
+		x = 1;
+	if (a == 1)
+		return (1);
+	if (a > 1)
+		x = a / 2;
+	for (int i = 0; i < 10; ++i){
+		x = (x + a / x) / 2;
+	}
+	return (x);
 }
 
 float	Poly::myABS(float a){
@@ -185,15 +199,19 @@ void	Poly::twoNotRealSolution(){
 	std::cout << "Discriminant is strictly negative, the two complex solutions are:" << std::endl;
 	printIrreductibleFraction(_bx1 * - 1, "/", 2 * _ax2);
 	std::cout << " + "; 
-	printIrreductibleFraction(sqrt(abs(_discriminant)), "i/", 2 * _ax2);
+	printIrreductibleFraction(mySQRT(myABS(_discriminant)), "i/", 2 * _ax2);
 	std::cout << std::endl;
 	printIrreductibleFraction(_bx1 * - 1, "/", 2 * _ax2);
 	std::cout << " - "; 
-	printIrreductibleFraction(sqrt(abs(_discriminant)), "i/", 2 * _ax2);
+	printIrreductibleFraction(mySQRT(myABS(_discriminant)), "i/", 2 * _ax2);
 	std::cout << std::endl;
 }
 
 
 const char*	SyntaxException::what() const throw(){
 		return "Wrong Syntax";
+}
+
+const char*	SQRTException::what() const throw(){
+		return "negative number in mySQRT";
 }
