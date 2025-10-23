@@ -7,8 +7,6 @@
 #include <exception>
 #include <map>
 #include <stdlib.h>
-//#include <tgmath.h>
-//#include <cstdio>
 
 class	Poly {
 

@@ -100,6 +100,8 @@ void	Poly::displayReducedForm(){
 }
 
 void	Poly::displayPolynomialDegree(){
+	if (_degree == 0)
+		return;
 	std::cout << "Polynomial degree: " << _degree << std::endl;
 }
 
